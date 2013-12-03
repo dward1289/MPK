@@ -4,11 +4,19 @@
     <string name="app_name">My Pokemon Keeper</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
-    <string name="addItem">Add New</string>
-    <string name="profileItem">Profile Card</string>
-    <string name="aboutItem">About</string>
-    <string name="shareItem">Share</string>
-    <string name="saveItem">Save</string>
-    <string name="listItem">List</string>
+    <string name="addNew">Add New</string>
+    <string name="pc">Profile Card</string>
+    <string name="about">About</string>
+    <string name="theVersion">Version 1.0</string>
+    <string name="logoItem">MG Logo</string>
+    <string name="theDeveloper">Developer: Devona Ward</string>
+    <string name="theList">Captured</string>
+    <string name="cs">Coming Soon</string>
+    <string name="pCap">Pokemon Captured</string>
+    <string name="pcTitle">Pokemon Trainer Profile</string>
+    <string name="imageName">attach image</string>
+    <string name="shareFB">Facebook Share</string>
+    <string name="ok">Save</string>
+    
 
 </resources>
