@@ -4,12 +4,12 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 
-public class CapturedList extends Activity {
+public class AboutPage extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.captured_page);
+		setContentView(R.layout.add_page);
 		
 		//Hides logo and displays title of application
 		getActionBar().setDisplayShowHomeEnabled(false);
@@ -18,8 +18,7 @@ public class CapturedList extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main_page, menu);
+		getMenuInflater().inflate(R.menu.about_menu, menu);
 		return true;
 	}
-
 }

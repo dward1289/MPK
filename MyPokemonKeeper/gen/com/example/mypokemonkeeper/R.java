@@ -22,14 +22,22 @@ public final class R {
     }
     public static final class drawable {
         public static final int about=0x7f020000;
-        public static final int add=0x7f020001;
-        public static final int ic_launcher=0x7f020002;
-        public static final int person=0x7f020003;
+        public static final int accept=0x7f020001;
+        public static final int add=0x7f020002;
+        public static final int ic_launcher=0x7f020003;
+        public static final int listit=0x7f020004;
+        public static final int person=0x7f020005;
+        public static final int sharefb=0x7f020006;
     }
     public static final class id {
-        public static final int aboutMG=0x7f080002;
-        public static final int add=0x7f080000;
-        public static final int profileCard=0x7f080001;
+        public static final int aboutMG=0x7f080005;
+        public static final int acceptit=0x7f080002;
+        public static final int add=0x7f080003;
+        public static final int listing=0x7f080000;
+        public static final int profileCard=0x7f080004;
+        public static final int saving=0x7f080007;
+        public static final int shareit=0x7f080001;
+        public static final int sharing=0x7f080006;
     }
     public static final class layout {
         public static final int add_page=0x7f030000;
@@ -39,7 +47,11 @@ public final class R {
         public static final int profile_page=0x7f030004;
     }
     public static final class menu {
-        public static final int main_page=0x7f070000;
+        public static final int about_menu=0x7f070000;
+        public static final int add_menu=0x7f070001;
+        public static final int avatar_menu=0x7f070002;
+        public static final int main_page=0x7f070003;
+        public static final int profile_menu=0x7f070004;
     }
     public static final class string {
         public static final int aboutItem=0x7f050005;
@@ -47,7 +59,10 @@ public final class R {
         public static final int addItem=0x7f050003;
         public static final int app_name=0x7f050000;
         public static final int hello_world=0x7f050002;
+        public static final int listItem=0x7f050008;
         public static final int profileItem=0x7f050004;
+        public static final int saveItem=0x7f050007;
+        public static final int shareItem=0x7f050006;
     }
     public static final class style {
         /** 

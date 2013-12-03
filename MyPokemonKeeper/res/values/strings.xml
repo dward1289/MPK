@@ -7,5 +7,8 @@
     <string name="addItem">Add New</string>
     <string name="profileItem">Profile Card</string>
     <string name="aboutItem">About</string>
+    <string name="shareItem">Share</string>
+    <string name="saveItem">Save</string>
+    <string name="listItem">List</string>
 
 </resources>
