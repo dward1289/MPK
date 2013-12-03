@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+    
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#47b4ea"
+        android:text=""
+        android:textSize="20sp"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/theavT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:background="#47b4ea"
+        android:text="@string/avSelect"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="20sp" />
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/avatarPreview"
+        android:contentDescription="@string/avDemo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center"
+        android:src="@drawable/avatardem" />
+
+    <LinearLayout
+        android:layout_width="235dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:id="@+id/image1"
+            android:contentDescription="@string/img1"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/epic" />
+
+        <ImageView
+            android:id="@+id/image2"
+            android:contentDescription="@string/img2"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/female" />
+
+        <ImageView
+            android:id="@+id/image3"
+            android:contentDescription="@string/img3"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/fennekin" />
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="238dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:id="@+id/image4"
+            android:contentDescription="@string/img4"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/gcea" />
+
+        <ImageView
+            android:id="@+id/image5"
+            android:contentDescription="@string/img5"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/icy" />
+
+        <ImageView
+            android:id="@+id/image6"
+            android:contentDescription="@string/img6"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/maletrainer" />
+    
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="239dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:id="@+id/image7"
+            android:contentDescription="@string/img7"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/pichukachu" />
+
+        <ImageView
+            android:id="@+id/image8"
+            android:contentDescription="@string/img8"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/pokemont" />
+
+        <ImageView
+            android:id="@+id/image9"
+            android:contentDescription="@string/img9"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/pokeman" />
+    
+    </LinearLayout>
+
+</LinearLayout>

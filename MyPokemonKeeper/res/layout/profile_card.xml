@@ -35,8 +35,141 @@
         android:contentDescription="@string/imageName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:layout_gravity="center"
         android:src="@drawable/attachbg" />
+
+    <RelativeLayout
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical" >
+
+        <ImageView
+            android:id="@+id/infoHelp1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/theUsername"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:contentDescription="@string/imageName"
+            android:src="@drawable/helpme" />
+
+        <TextView
+            android:id="@+id/theUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/infoHelp1"
+            android:text="@string/theUN"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="20sp" />
+
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/userTxt"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/unHint"
+        android:ems="10" >
+        <requestFocus />
+    </EditText>
+    
+    <RelativeLayout
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <ImageView
+            android:id="@+id/infoHelp2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/theFriendCode"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/theFriendCode"
+            android:contentDescription="@string/imageName"
+            android:src="@drawable/helpme" />
+
+        <TextView
+            android:id="@+id/theFriendCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="16dp"
+            android:text="@string/theFC"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="20sp" />
+    </RelativeLayout>
+    
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" 
+    android:layout_marginBottom="10dp">
+    
+        <EditText
+        android:id="@+id/code1"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_width="80dp"
+        android:maxLength="4"
+        android:inputType="number"
+        android:layout_height="wrap_content"
+        android:hint="@string/codeNum"
+        android:ems="10" >
+        <requestFocus />
+    	</EditText>
+    
+        <EditText
+        android:id="@+id/code2"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:maxLength="4"
+        android:inputType="number"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/codeNum"
+        android:ems="10" >
+        <requestFocus />
+    	</EditText>
+    
+        <EditText
+        android:id="@+id/code3"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:maxLength="4"
+        android:inputType="number"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/codeNum"
+        android:ems="10" >
+        <requestFocus />
+    	</EditText>
+    
+    </LinearLayout>
+    
+    <TextView
+            android:id="@+id/theFavP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:text="@string/theFP"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="20sp" />
+    <EditText
+        android:id="@+id/theFavTxt"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/myP"
+        android:ems="10" >
+        <requestFocus />
+    </EditText>
 
 </LinearLayout>

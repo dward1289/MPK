@@ -17,6 +17,23 @@
     <string name="imageName">attach image</string>
     <string name="shareFB">Facebook Share</string>
     <string name="ok">Save</string>
+    <string name="theUN">Username:</string>
+    <string name="theFC">Friend Code:</string>
+    <string name="unHint">MadGeek1289</string>
+    <string name="codeNum">2178</string>
+    <string name="theFP">Favorite Pokemon:</string>
+    <string name="myP">Charizard</string>
+    <string name="avSelect">Avatar Selection</string>
+    <string name="avDemo">defaultImage</string>
+    <string name="img1">img1</string>
+    <string name="img2">img2</string>
+    <string name="img3">img3</string>
+    <string name="img4">img4</string>
+    <string name="img5">img5</string>
+    <string name="img6">img6</string>
+    <string name="img7">img7</string>
+    <string name="img8">img8</string>
+    <string name="img9">img9</string>
     
 
 </resources>
