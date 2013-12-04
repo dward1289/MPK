@@ -1,6 +1,7 @@
 package com.DevonaWard.mpk;
 
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -13,6 +14,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
@@ -48,12 +50,25 @@ public class ProfileCard extends Activity {
 	Bitmap resized;
 	
 	//The Strings for the data
-	String unData;
-	String fcData;
-	String fpData;
+	String usernameTxt;
+	String friendCodeTxt;
+	String favPokemonTxt;
 	String c1;
 	String c2;
 	String c3;
+	int image;
+	
+	//Data reload strings
+	int currentImg;
+	String currentUN;
+	String currentFC1;
+	String currentFC2;
+	String currentFC3;
+	String currentFP;
+	
+	//Hints
+	ImageView help1;
+	ImageView help2;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +76,9 @@ public class ProfileCard extends Activity {
 		setContentView(R.layout.profile_card);
 		
 		//Hide application logo from action bar
-		getActionBar().setDisplayShowHomeEnabled(false);
+		ActionBar actionBar = getActionBar();
+		actionBar.setDisplayShowHomeEnabled(false);
+
 		
 		//Add the font to text views and edit texts
 		thePTP = (TextView)findViewById(R.id.thepct);
@@ -73,7 +90,8 @@ public class ProfileCard extends Activity {
 		theCode2 = (EditText)findViewById(R.id.code2);
 		theCode3 = (EditText)findViewById(R.id.code3);
 		favInput = (EditText)findViewById(R.id.theFavTxt);
-		
+				
+		//Fonts
 		font = Typeface.createFromAsset(getAssets(), "robotobold.ttf");
 		thePTP.setTypeface(font);
 		font2 = Typeface.createFromAsset(getAssets(), "robotothin.ttf");
@@ -100,7 +118,43 @@ public class ProfileCard extends Activity {
 			return true;
 		}
          });
-	}
+		
+		help1 = (ImageView)findViewById(R.id.infoHelp1);
+		help1.setOnTouchListener(new OnTouchListener() {  
+  
+		@Override
+		public boolean onTouch(View arg0, MotionEvent arg1) {
+
+			if(arg1.getAction() == MotionEvent.ACTION_DOWN){
+				helpHint1();
+			}
+			return true;
+		}
+         });
+		
+		help2 = (ImageView)findViewById(R.id.infoHelp2);
+		help2.setOnTouchListener(new OnTouchListener() {  
+  
+		@Override
+		public boolean onTouch(View arg0, MotionEvent arg1) {
+
+			if(arg1.getAction() == MotionEvent.ACTION_DOWN){
+				helpHint2();
+			}
+			return true;
+		}
+         });
+			    
+		Bundle extras = getIntent().getExtras();
+		if (extras == null) {
+		    return;
+		    }
+		// Get selected image
+		image = extras.getInt("AvatarImage");
+		if (image != 0) {
+			attachImage.setImageResource(image);
+		} 
+	}	
 
 	//Option Alert displayed when image is tapped.
 	public void theOptions(){
@@ -141,8 +195,52 @@ public class ProfileCard extends Activity {
 		        });
 		//Display Options
 		optionsGiven.show();
+	}
+	
+	public void helpHint1(){
+		
+		//Create alert Dialog		 
+		AlertDialog.Builder helper1 = new AlertDialog.Builder(ProfileCard.this);
+		 
+		//Alert Title
+		helper1.setTitle("Username");
+		 
+		// Setting Dialog Message
+		helper1.setMessage("On your Nintendo 3DS, tap the square smiley face at the top.\nLook for the crown logo on the character image.\nYour username is at the bottom of that image.");
 
+		helper1.setPositiveButton("OK",
+		        new DialogInterface.OnClickListener() {
 
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						
+					}
+		        });
+		//Display Help
+		helper1.show();
+	}
+	
+	public void helpHint2(){
+		
+		//Create alert Dialog		 
+		AlertDialog.Builder helper2 = new AlertDialog.Builder(ProfileCard.this);
+		 
+		//Alert Title
+		helper2.setTitle("Friend Code");
+		 
+		// Setting Dialog Message
+		helper2.setMessage("On your Nintendo 3DS, tap the square smiley face at the top.\nLook for the crown logo on the character image.\nTap the image and your Friend Code is at the bottom of the username.");
+
+		helper2.setPositiveButton("OK",
+		        new DialogInterface.OnClickListener() {
+		 
+		            public void onClick(DialogInterface dialog, int which) {
+		            
+		            }
+		        });
+
+		//Display Options
+		helper2.show();
 	}
 	
 	    //Displays image if captured or uploaded from gallery
@@ -170,7 +268,6 @@ public class ProfileCard extends Activity {
 		            attachImage.setImageBitmap(resized);		         
 		        }
 		}
-		
 	public void selectAvatar(){
 		Intent intent = new Intent(this, AvatarPage.class);
 	    startActivity(intent);
@@ -181,5 +278,33 @@ public class ProfileCard extends Activity {
 		getMenuInflater().inflate(R.menu.profile_menu, menu);
 		return true;
 	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    // Handle presses on the action bar items
+	    switch (item.getItemId()) {
+	    case android.R.id.home:
+	    	Intent intent = new Intent(this, CapturedList.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            break;
+	        case R.id.saveIt:
+	            saveData();
+	            break;
+	        default:
+	            break;
+	    }
+	    return true;
+	}
+	
+	public void saveData(){
+		usernameTxt = unInput.getText().toString();
+		favPokemonTxt = favInput.getText().toString();
+		c1 = theCode1.getText().toString();
+		c2 = theCode2.getText().toString();
+		c3 = theCode3.getText().toString();	
+	}
+	
+	
 }
 
