@@ -1,9 +1,19 @@
 package com.DevonaWard.mpk;
 
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.Arrays;
+
+
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -13,6 +23,7 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -21,6 +32,7 @@ import android.view.View.OnTouchListener;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class ProfileCard extends Activity {
@@ -57,14 +69,14 @@ public class ProfileCard extends Activity {
 	String c2;
 	String c3;
 	int image;
-	
-	//Data reload strings
-	int currentImg;
-	String currentUN;
-	String currentFC1;
-	String currentFC2;
-	String currentFC3;
-	String currentFP;
+
+	//Save Data
+	FileOutputStream fos;
+    String fileName;
+	String ret;
+	String content;
+	String[] SavedFiles;
+	Bitmap bitmap;
 	
 	//Hints
 	ImageView help1;
@@ -107,6 +119,17 @@ public class ProfileCard extends Activity {
 		
 		//ImageView on touch listener
 		attachImage = (ImageView)findViewById(R.id.imageAttach);
+		attachImage.setDrawingCacheEnabled(true);
+		
+		//Saved files list
+		SavedFiles = getApplicationContext().fileList();
+		
+		//Get saved data
+		if(SavedFiles.length>0){
+		readFromFile();
+		}
+		
+		//ImageView onTouch
 		attachImage.setOnTouchListener(new OnTouchListener() {  
   
 		@Override
@@ -119,6 +142,7 @@ public class ProfileCard extends Activity {
 		}
          });
 		
+		//Help 1 onTouch
 		help1 = (ImageView)findViewById(R.id.infoHelp1);
 		help1.setOnTouchListener(new OnTouchListener() {  
   
@@ -132,6 +156,7 @@ public class ProfileCard extends Activity {
 		}
          });
 		
+		//Help 2 onTouch
 		help2 = (ImageView)findViewById(R.id.infoHelp2);
 		help2.setOnTouchListener(new OnTouchListener() {  
   
@@ -144,7 +169,8 @@ public class ProfileCard extends Activity {
 			return true;
 		}
          });
-			    
+		
+		
 		Bundle extras = getIntent().getExtras();
 		if (extras == null) {
 		    return;
@@ -152,8 +178,10 @@ public class ProfileCard extends Activity {
 		// Get selected image
 		image = extras.getInt("AvatarImage");
 		if (image != 0) {
-			attachImage.setImageResource(image);
-		} 
+			resized = BitmapFactory.decodeResource(getResources(),image);
+			attachImage.setImageBitmap(resized);
+		} 	
+			
 	}	
 
 	//Option Alert displayed when image is tapped.
@@ -296,15 +324,79 @@ public class ProfileCard extends Activity {
 	    }
 	    return true;
 	}
-	
-	public void saveData(){
-		usernameTxt = unInput.getText().toString();
-		favPokemonTxt = favInput.getText().toString();
-		c1 = theCode1.getText().toString();
-		c2 = theCode2.getText().toString();
-		c3 = theCode3.getText().toString();	
+		
+	//Save all text entered
+	public void saveData() {
+		usernameTxt = unInput.getText().toString(); 
+		  c1 = theCode1.getText().toString();
+		  c2 = theCode2.getText().toString();
+		  c3 = theCode3.getText().toString();
+		  favPokemonTxt = favInput.getText().toString();
+		  
+		  fileName = "PTP";			
+          content = usernameTxt+"\n"+c1+"\n"+c2+"\n"+c3+"\n"+favPokemonTxt;
+          try {
+           fos = openFileOutput(fileName, Context.MODE_PRIVATE);
+           fos.write(content.getBytes());
+           fos.close();
+          
+           //Show that data was saved
+           Toast.makeText(
+             ProfileCard.this,
+             "Saved",
+             Toast.LENGTH_LONG).show();
+          
+          } catch (FileNotFoundException e) {
+           // TODO Auto-generated catch block
+           e.printStackTrace();
+          } catch (IOException e) {
+           // TODO Auto-generated catch block
+           e.printStackTrace();
+          }
+			Log.i("SAVED IT",Arrays.toString(SavedFiles));
+			
 	}
 	
-	
+	  //Read text data stored.
+	  private String readFromFile() {
+		    try {
+		        InputStream inputStream = openFileInput(SavedFiles[0]);
+
+		        if ( inputStream != null ) {
+		            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+		            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+		            String receiveString;
+		            StringBuilder stringBuilder = new StringBuilder();
+
+		            while ((receiveString = bufferedReader.readLine()) != null ) {
+		            	if(receiveString.length() != 0){
+		                stringBuilder.append(receiveString + "\n");
+		            }
+		            	
+		            }
+		            inputStream.close();
+		            ret = stringBuilder.toString();  
+		        }
+		    }
+		    catch (FileNotFoundException e) {
+		        Log.e("login activity", "File not found: " + e.toString());
+		    } catch (IOException e) {
+		        Log.e("login activity", "Can not read file: " + e.toString());
+		    }
+		    Log.i("CONTENT", ret);
+            String[] arr= ret.split("\n");
+            unInput.setText(arr[0]);
+            theCode1.setText(arr[1]);
+            theCode2.setText(arr[2]);
+            theCode3.setText(arr[3]);
+            favInput.setText(arr[4]);
+              
+		    return ret; 
+		}
+
 }
+	
+
+    	
+
 
