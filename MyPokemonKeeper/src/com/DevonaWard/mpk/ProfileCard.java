@@ -24,7 +24,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Menu;
@@ -134,10 +133,6 @@ public class ProfileCard extends Activity {
 		getImage("ProfileImage.png");
 		}
 		
-		if(SavedFiles.length == 2){
-			tempTxtRead();
-		}
-		
 		//ImageView onTouch
 		attachImage.setOnTouchListener(new OnTouchListener() {  
   
@@ -145,7 +140,6 @@ public class ProfileCard extends Activity {
 		public boolean onTouch(View arg0, MotionEvent arg1) {
 
 			if(arg1.getAction() == MotionEvent.ACTION_DOWN){
-				saveTempData();
 				theOptions();
 			}
 			return true;
@@ -211,7 +205,6 @@ public class ProfileCard extends Activity {
 		        new DialogInterface.OnClickListener() {
 		 
 		            public void onClick(DialogInterface dialog, int which) {
-		            	saveTempData();
 		            	selectAvatar();
 		            }
 		        });
@@ -506,69 +499,6 @@ public class ProfileCard extends Activity {
 		  attachImage.setImageBitmap(thumbnail);
 		  return thumbnail;
 		  }
-	  
-		//Save all text entered in case user selects Profile Image last.
-		public void saveTempData() {
-			usernameTxt = unInput.getText().toString();
-			  c1 = theCode2.getText().toString();
-			  c2 = theCode2.getText().toString();
-			  c3 = theCode2.getText().toString();
-			  favPokemonTxt = favInput.getText().toString();
-			  
-			  fileName = "TempTxt";			
-	          content = usernameTxt+"\n"+c1+"\n"+c2+"\n"+c3+"\n"+favPokemonTxt;
-	          try {
-	           fos = openFileOutput(fileName, Context.MODE_PRIVATE);
-	           fos.write(content.getBytes());
-	           fos.close();
-	          } catch (FileNotFoundException e) {
-	           // TODO Auto-generated catch block
-	           e.printStackTrace();
-	          } catch (IOException e) {
-	           // TODO Auto-generated catch block
-	           e.printStackTrace();
-	          }
-				Log.i("SAVED IT",Arrays.toString(SavedFiles));
-				
-		}
-		
-		  //Read text data stored.
-		  private String tempTxtRead() {
-			    try {
-			        InputStream inputStream = openFileInput(SavedFiles[1]);
-
-			        if ( inputStream != null ) {
-			            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-			            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-			            String receiveString;
-			            StringBuilder stringBuilder = new StringBuilder();
-
-			            while ((receiveString = bufferedReader.readLine()) != null ) {
-			            	if(receiveString.length() != 0){
-			                stringBuilder.append(receiveString + "\n");
-			            }
-			            	
-			            }
-			            inputStream.close();
-			            ret2 = stringBuilder.toString();  
-			        }
-			    }
-			    catch (FileNotFoundException e) {
-			        Log.e("login activity", "File not found: " + e.toString());
-			    } catch (IOException e) {
-			        Log.e("login activity", "Can not read file: " + e.toString());
-			    }
-			    Log.i("CONTENT2", ret2);
-	            String[] arr2= ret2.split("\n");
-	            unInput.setText(arr2[0]);
-	            theCode1.setText(arr2[1]);
-	            theCode2.setText(arr2[2]);
-	            theCode3.setText(arr2[3]);
-	            
-	              
-			    return ret2; 
-			}
-
 }
 	
 
