@@ -2,6 +2,8 @@ package com.DevonaWard.mpk;
 
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -22,6 +24,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Menu;
@@ -74,6 +77,7 @@ public class ProfileCard extends Activity {
 	FileOutputStream fos;
     String fileName;
 	String ret;
+	String ret2;
 	String content;
 	String[] SavedFiles;
 	Bitmap bitmap;
@@ -127,6 +131,11 @@ public class ProfileCard extends Activity {
 		//Get saved data
 		if(SavedFiles.length>0){
 		readFromFile();
+		getImage("ProfileImage.png");
+		}
+		
+		if(SavedFiles.length == 2){
+			tempTxtRead();
 		}
 		
 		//ImageView onTouch
@@ -136,6 +145,7 @@ public class ProfileCard extends Activity {
 		public boolean onTouch(View arg0, MotionEvent arg1) {
 
 			if(arg1.getAction() == MotionEvent.ACTION_DOWN){
+				saveTempData();
 				theOptions();
 			}
 			return true;
@@ -184,6 +194,7 @@ public class ProfileCard extends Activity {
 			
 	}	
 
+	
 	//Option Alert displayed when image is tapped.
 	public void theOptions(){
 		
@@ -200,6 +211,7 @@ public class ProfileCard extends Activity {
 		        new DialogInterface.OnClickListener() {
 		 
 		            public void onClick(DialogInterface dialog, int which) {
+		            	saveTempData();
 		            	selectAvatar();
 		            }
 		        });
@@ -317,7 +329,7 @@ public class ProfileCard extends Activity {
             startActivity(intent);
             break;
 	        case R.id.saveIt:
-	            saveData();
+	            checkData();
 	            break;
 	        default:
 	            break;
@@ -325,12 +337,80 @@ public class ProfileCard extends Activity {
 	    return true;
 	}
 		
+	public void checkData(){
+		if(attachImage.getDrawable() == null){
+			AlertDialog.Builder userErr = new AlertDialog.Builder(ProfileCard.this);
+			userErr.setTitle("Profile Photo");
+			userErr.setMessage("Please select a Profile Photo.");
+			userErr.setPositiveButton("OK",
+			        new DialogInterface.OnClickListener() {
+			            public void onClick(DialogInterface dialog, int which) {			            
+			            }
+			        });
+			userErr.show();	
+		}
+		if(unInput.getText().toString().trim().equals("")){	 
+			AlertDialog.Builder userErr = new AlertDialog.Builder(ProfileCard.this);
+			userErr.setTitle("Username");
+			userErr.setMessage("Please enter username.");
+			userErr.setPositiveButton("OK",
+			        new DialogInterface.OnClickListener() {
+			            public void onClick(DialogInterface dialog, int which) {			            
+			            }
+			        });
+			userErr.show();	
+		}else{
+			usernameTxt = unInput.getText().toString();
+		}
+			
+			if(theCode1.getText().toString().trim().equals("") || theCode1.getText().toString().length() < 4){	 
+			AlertDialog.Builder userErr = new AlertDialog.Builder(ProfileCard.this);
+			userErr.setTitle("Friend Code");
+			userErr.setMessage("Section 1 of the Friend Code has not been entered.");
+			userErr.setPositiveButton("OK",
+			        new DialogInterface.OnClickListener() {
+			            public void onClick(DialogInterface dialog, int which) {			            
+			            }
+			        });
+			userErr.show();	
+		}else{
+			c1 = theCode1.getText().toString();
+		}
+			if(theCode2.getText().toString().trim().equals("") || theCode2.getText().toString().length() < 4){
+			AlertDialog.Builder userErr = new AlertDialog.Builder(ProfileCard.this);
+			userErr.setTitle("Friend Code");
+			userErr.setMessage("Section 2 of the Friend Code has not been entered.");
+			userErr.setPositiveButton("OK",
+			        new DialogInterface.OnClickListener() {
+			            public void onClick(DialogInterface dialog, int which) {			            
+			            }
+			        });
+			userErr.show();	
+		}else{
+			c2 = theCode2.getText().toString();
+		}
+			if(theCode3.getText().toString().trim().equals("") || theCode3.getText().toString().length() < 4){
+			AlertDialog.Builder userErr = new AlertDialog.Builder(ProfileCard.this);
+			userErr.setTitle("Friend Code");
+			userErr.setMessage("Section 3 of the Friend Code has not been entered.");
+			userErr.setPositiveButton("OK",
+			        new DialogInterface.OnClickListener() {
+			            public void onClick(DialogInterface dialog, int which) {			            
+			            }
+			        });
+			userErr.show();	
+		}else{
+			c3 = theCode3.getText().toString();
+		}
+			
+		if(unInput.getText().toString().length() > 0 && theCode1.getText().toString().length() == 4 && theCode2.getText().toString().length() == 4 && theCode3.getText().toString().length() == 4 && attachImage.getDrawable() != null){
+			saveData();
+		}
+
+
+	}
 	//Save all text entered
 	public void saveData() {
-		usernameTxt = unInput.getText().toString(); 
-		  c1 = theCode1.getText().toString();
-		  c2 = theCode2.getText().toString();
-		  c3 = theCode3.getText().toString();
 		  favPokemonTxt = favInput.getText().toString();
 		  
 		  fileName = "PTP";			
@@ -339,7 +419,7 @@ public class ProfileCard extends Activity {
            fos = openFileOutput(fileName, Context.MODE_PRIVATE);
            fos.write(content.getBytes());
            fos.close();
-          
+           saveImage(resized);
            //Show that data was saved
            Toast.makeText(
              ProfileCard.this,
@@ -393,6 +473,101 @@ public class ProfileCard extends Activity {
               
 		    return ret; 
 		}
+	  
+	  //Save image in image view
+	  public boolean saveImage(Bitmap image) {
+
+		  try {
+		  // Use the compress method on the Bitmap object to write image to
+		  // the OutputStream
+		  FileOutputStream fos = this.openFileOutput("ProfileImage.png", Context.MODE_PRIVATE);
+
+		  // Writing the bitmap to the output stream
+		  resized.compress(Bitmap.CompressFormat.PNG, 100, fos);
+		  fos.close();
+
+		  return true;
+		  } catch (Exception e) {
+		  Log.e("saveToInternalStorage()", e.getMessage());
+		  return false;
+		  }
+		  }
+	  //Load image	  
+	  public Bitmap getImage(String filename) {
+
+		  Bitmap thumbnail = null;
+		  try {
+		  File filePath = this.getFileStreamPath(filename);
+		  FileInputStream fi = new FileInputStream(filePath);
+		  thumbnail = BitmapFactory.decodeStream(fi);
+		  } catch (Exception ex) {
+		  Log.e("getThumbnail() on internal storage", ex.getMessage());
+		  }
+		  attachImage.setImageBitmap(thumbnail);
+		  return thumbnail;
+		  }
+	  
+		//Save all text entered in case user selects Profile Image last.
+		public void saveTempData() {
+			usernameTxt = unInput.getText().toString();
+			  c1 = theCode2.getText().toString();
+			  c2 = theCode2.getText().toString();
+			  c3 = theCode2.getText().toString();
+			  favPokemonTxt = favInput.getText().toString();
+			  
+			  fileName = "TempTxt";			
+	          content = usernameTxt+"\n"+c1+"\n"+c2+"\n"+c3+"\n"+favPokemonTxt;
+	          try {
+	           fos = openFileOutput(fileName, Context.MODE_PRIVATE);
+	           fos.write(content.getBytes());
+	           fos.close();
+	          } catch (FileNotFoundException e) {
+	           // TODO Auto-generated catch block
+	           e.printStackTrace();
+	          } catch (IOException e) {
+	           // TODO Auto-generated catch block
+	           e.printStackTrace();
+	          }
+				Log.i("SAVED IT",Arrays.toString(SavedFiles));
+				
+		}
+		
+		  //Read text data stored.
+		  private String tempTxtRead() {
+			    try {
+			        InputStream inputStream = openFileInput(SavedFiles[1]);
+
+			        if ( inputStream != null ) {
+			            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+			            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+			            String receiveString;
+			            StringBuilder stringBuilder = new StringBuilder();
+
+			            while ((receiveString = bufferedReader.readLine()) != null ) {
+			            	if(receiveString.length() != 0){
+			                stringBuilder.append(receiveString + "\n");
+			            }
+			            	
+			            }
+			            inputStream.close();
+			            ret2 = stringBuilder.toString();  
+			        }
+			    }
+			    catch (FileNotFoundException e) {
+			        Log.e("login activity", "File not found: " + e.toString());
+			    } catch (IOException e) {
+			        Log.e("login activity", "Can not read file: " + e.toString());
+			    }
+			    Log.i("CONTENT2", ret2);
+	            String[] arr2= ret2.split("\n");
+	            unInput.setText(arr2[0]);
+	            theCode1.setText(arr2[1]);
+	            theCode2.setText(arr2[2]);
+	            theCode3.setText(arr2[3]);
+	            
+	              
+			    return ret2; 
+			}
 
 }
 	
