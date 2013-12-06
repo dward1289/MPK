@@ -1,4 +1,0 @@
-MPK
-===
-
-My Pokemon Keeper
