@@ -31,7 +31,8 @@
         
         <activity
             android:name="com.DevonaWard.mpk.AboutPage"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+             android:parentActivityName="com.DevonaWard.mpk.CapturedList">
         </activity>
         
         <activity
@@ -47,6 +48,12 @@
             android:name="com.DevonaWard.mpk.AvatarPage"
             android:label="@string/app_name"
             android:parentActivityName="com.DevonaWard.mpk.ProfileCard">
+        </activity>
+        
+        <activity
+            android:name="com.DevonaWard.mpk.AddNew"
+            android:label="@string/app_name"
+            android:parentActivityName="com.DevonaWard.mpk.CapturedList">
         </activity>
     </application>
     

@@ -396,7 +396,21 @@ public class ProfileCard extends Activity {
 			c3 = theCode3.getText().toString();
 		}
 			
-		if(unInput.getText().toString().length() > 0 && theCode1.getText().toString().length() == 4 && theCode2.getText().toString().length() == 4 && theCode3.getText().toString().length() == 4 && attachImage.getDrawable() != null){
+			if(favInput.getText().toString().trim().equals("") || theCode3.getText().toString().length() < 4){
+				AlertDialog.Builder userErr = new AlertDialog.Builder(ProfileCard.this);
+				userErr.setTitle("Favorite Pokemon");
+				userErr.setMessage("Please enter your favorite Pokemon.");
+				userErr.setPositiveButton("OK",
+				        new DialogInterface.OnClickListener() {
+				            public void onClick(DialogInterface dialog, int which) {			            
+				            }
+				        });
+				userErr.show();	
+			}else{
+				favPokemonTxt = favInput.getText().toString();
+			}
+			
+		if(unInput.getText().toString().length() > 0 && theCode1.getText().toString().length() == 4 && theCode2.getText().toString().length() == 4 && theCode3.getText().toString().length() == 4 && attachImage.getDrawable() != null && favInput.getText().toString().length() > 0){
 			saveData();
 		}
 
@@ -404,8 +418,6 @@ public class ProfileCard extends Activity {
 	}
 	//Save all text entered
 	public void saveData() {
-		  favPokemonTxt = favInput.getText().toString();
-		  
 		  fileName = "PTP";			
           content = usernameTxt+"\n"+c1+"\n"+c2+"\n"+c3+"\n"+favPokemonTxt;
           try {

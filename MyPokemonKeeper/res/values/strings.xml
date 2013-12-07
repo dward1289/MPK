@@ -13,6 +13,7 @@
     <string name="theList">Captured</string>
     <string name="cs">Coming Soon</string>
     <string name="pCap">Pokemon Captured</string>
+    <string name="aNap">New Pokemon Captured</string>
     <string name="pcTitle">Pokemon Trainer Profile</string>
     <string name="imageName">attach image</string>
     <string name="shareFB">Facebook Share</string>
