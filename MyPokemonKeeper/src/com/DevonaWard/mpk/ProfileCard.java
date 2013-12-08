@@ -296,10 +296,10 @@ public class ProfileCard extends Activity {
 		            String picturePath = cursor.getString(columnIndex);
 		            cursor.close();
 
-		            BitmapFactory.Options options = new BitmapFactory.Options ();
-		            options.inSampleSize = 4;
-		            resized = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(picturePath),(int)(BitmapFactory.decodeFile(picturePath).getWidth()*2), (int)(BitmapFactory.decodeFile(picturePath).getHeight()*2), true);
 
+		            BitmapFactory.Options options = new BitmapFactory.Options();
+		            options.inSampleSize = 4;
+		            resized = BitmapFactory.decodeFile(picturePath, options);
 		            attachImage.setImageBitmap(resized);		         
 		        }
 		}
