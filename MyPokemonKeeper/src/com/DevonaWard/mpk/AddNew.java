@@ -6,12 +6,23 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 public class AddNew extends Activity {
 
 	Typeface font;
+	Typeface font2;
 	TextView theTitle;
+	TextView theType;
+	TextView theName;
+	TextView theDate;
+	TextView theLvl;
+	EditText lvlNum;
+	Spinner pokemonType;
+	Spinner pokemonName;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -20,8 +31,22 @@ public class AddNew extends Activity {
 		getActionBar().setDisplayShowHomeEnabled(false);
 		
 		theTitle = (TextView)findViewById(R.id.theTitle);
+		theType = (TextView)findViewById(R.id.typeText);
+		theName = (TextView)findViewById(R.id.pokemonText);
+		theDate = (TextView)findViewById(R.id.dateText);
+		theLvl = (TextView)findViewById(R.id.lvlNumber);
+		lvlNum = (EditText)findViewById(R.id.lvlText);
+		pokemonName = (Spinner)findViewById(R.id.pokemonSpinner);
+		pokemonType = (Spinner)findViewById(R.id.typeSpinner);
+		
 		font = Typeface.createFromAsset(getAssets(), "robotobold.ttf");
-		theTitle.setTypeface(font);	
+		font2 = Typeface.createFromAsset(getAssets(), "robotothin.ttf");
+		theTitle.setTypeface(font);
+		theType.setTypeface(font2);
+		theName.setTypeface(font2);
+		theDate.setTypeface(font2);
+		theLvl.setTypeface(font2);
+		lvlNum.setTypeface(font2);
 	}
 
 	@Override
@@ -47,5 +72,6 @@ public class AddNew extends Activity {
 	    }
 	    return true;
 	}
+	
 
 }
