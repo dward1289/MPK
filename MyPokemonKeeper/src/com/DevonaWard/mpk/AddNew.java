@@ -30,6 +30,8 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -59,6 +61,8 @@ public class AddNew extends Activity {
 	ArrayList<String> pNameList= new ArrayList<String>();
 	String pName;
 	ImageView help;
+	String typeSelected;
+	String pType;
 	
 	
 	@Override
@@ -103,6 +107,21 @@ public class AddNew extends Activity {
 		
 		DownloadJSONTask task = new DownloadJSONTask();
 		task.execute();
+		
+		pokemonType.setOnItemSelectedListener(new OnItemSelectedListener(){
+
+			@Override
+			public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+				
+			typeSelected = parent.getItemAtPosition(pos).toString();
+			}
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+				// TODO Auto-generated method stub
+				
+			}	
+	});
+		
 	}
 
 	private class DownloadJSONTask extends AsyncTask<String, Void, String> {
@@ -148,9 +167,14 @@ public class AddNew extends Activity {
                         int n = jsonArray.length();
                         for(int i = 0;i<n; i++){
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                
-                                pName= jsonObject.getString("name");
+             
+                                pType = jsonObject.getString("type");
+                                if(pType.contains(typeSelected)){
+                                	//POSSIBLY DELETE
+                                pName = jsonObject.getString("name");
+
                                 pNameList.add(pName);
+                                }
                         }
                         
                         Log.i("WE HAVE DATA", pNameList.toString());
