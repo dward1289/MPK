@@ -29,21 +29,22 @@ public final class R {
         public static final int add=0x7f020002;
         public static final int attachbg=0x7f020003;
         public static final int avatardem=0x7f020004;
-        public static final int epic=0x7f020005;
-        public static final int female=0x7f020006;
-        public static final int fennekin=0x7f020007;
-        public static final int gcea=0x7f020008;
-        public static final int helpme=0x7f020009;
-        public static final int ic_launcher=0x7f02000a;
-        public static final int icy=0x7f02000b;
-        public static final int listit=0x7f02000c;
-        public static final int maletrainer=0x7f02000d;
-        public static final int mglogo=0x7f02000e;
-        public static final int person=0x7f02000f;
-        public static final int pichukachu=0x7f020010;
-        public static final int pokeman=0x7f020011;
-        public static final int pokemont=0x7f020012;
-        public static final int sharefb=0x7f020013;
+        public static final int chdance=0x7f020005;
+        public static final int epic=0x7f020006;
+        public static final int female=0x7f020007;
+        public static final int fennekin=0x7f020008;
+        public static final int gcea=0x7f020009;
+        public static final int helpme=0x7f02000a;
+        public static final int ic_launcher=0x7f02000b;
+        public static final int icy=0x7f02000c;
+        public static final int listit=0x7f02000d;
+        public static final int maletrainer=0x7f02000e;
+        public static final int mglogo=0x7f02000f;
+        public static final int person=0x7f020010;
+        public static final int pichukachu=0x7f020011;
+        public static final int pokeman=0x7f020012;
+        public static final int pokemont=0x7f020013;
+        public static final int sharefb=0x7f020014;
     }
     public static final class id {
         public static final int aboutMG=0x7f09002b;
