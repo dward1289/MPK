@@ -104,6 +104,7 @@
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
         android:ems="10"
+        android:maxLength="3"
         android:inputType="number" 
         android:textSize="20sp"/>
 
@@ -114,6 +115,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
+        android:onClick="selectDate"
         android:textSize="20sp"
         android:text="@string/selectD" />
     
@@ -123,6 +125,7 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
         android:textSize="20sp"
         android:text=""
         android:textAppearance="?android:attr/textAppearanceMedium" />

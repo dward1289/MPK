@@ -2,16 +2,24 @@ package com.DevonaWard.mpk;
 
 import java.io.BufferedInputStream;
 import java.io.InputStream;
+import java.text.DateFormatSymbols;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
@@ -19,8 +27,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.View.OnTouchListener;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -45,6 +58,7 @@ public class AddNew extends Activity {
 	ProgressDialog dialog;
 	ArrayList<String> pNameList= new ArrayList<String>();
 	String pName;
+	ImageView help;
 	
 	
 	@Override
@@ -72,14 +86,26 @@ public class AddNew extends Activity {
 		theLvl.setTypeface(font2);
 		lvlNum.setTypeface(font2);	
 		
-		DownloadWebPageTask task = new DownloadWebPageTask();
-		task.execute();
 		
-		
+		//Help image onTouch
+		help = (ImageView)findViewById(R.id.helpImg);
+		help.setOnTouchListener(new OnTouchListener() {  
+  
+		@Override
+		public boolean onTouch(View arg0, MotionEvent arg1) {
 
+			if(arg1.getAction() == MotionEvent.ACTION_DOWN){
+				helpHint();
+			}
+			return true;
+		}
+         });
+		
+		DownloadJSONTask task = new DownloadJSONTask();
+		task.execute();
 	}
 
-	private class DownloadWebPageTask extends AsyncTask<String, Void, String> {
+	private class DownloadJSONTask extends AsyncTask<String, Void, String> {
 		
 		//Status update while getting data.
 		@Override
@@ -131,6 +157,7 @@ public class AddNew extends Activity {
                         populateSpinner();
                         dialog.dismiss();
                         
+                        
                 } catch (JSONException e1) {
                         // TODO Auto-generated catch block
                         e1.printStackTrace();
@@ -139,6 +166,61 @@ public class AddNew extends Activity {
 }
 	
 
+	//Date picker created
+		 public void selectDate(View view) {
+	   	  	DialogFragment newFragment = new SelectDateFragment();
+	   	  	newFragment.show(getFragmentManager(), "DatePicker");
+	   	  }
+	   	  
+		 //Display Date in text view
+		 public void populateSetDate(int year, int month, int day) {
+			 
+	   	  	theDate.setText("Caught on "+getMonth(month).toString()+" "+day+", "+year+".");
+	   	  }
+		 
+		 //Get date from date picker
+	   	  @SuppressLint("ValidFragment")
+		  public class SelectDateFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
+	   		  @Override
+	   		  public Dialog onCreateDialog(Bundle savedInstanceState) {
+	   			  final Calendar calendar = Calendar.getInstance();
+	   			  int yy = calendar.get(Calendar.YEAR);
+	   			  int mm = calendar.get(Calendar.MONTH);
+	   			  int dd = calendar.get(Calendar.DAY_OF_MONTH);
+	   			  return new DatePickerDialog(getActivity(), this, yy, mm, dd);
+	   	  }
+	   	   
+	   		  public void onDateSet(DatePicker view, int yy, int mm, int dd) {
+	   			  populateSetDate(yy, mm+1, dd);
+	   		  }
+	   	  }
+	   	  
+	public String getMonth(int month) {
+	   	    return new DateFormatSymbols().getMonths()[month-1];
+	   	}
+	
+	public void helpHint(){
+		
+		//Create alert Dialog		 
+		AlertDialog.Builder helper = new AlertDialog.Builder(AddNew.this);
+		 
+		//Alert Title
+		helper.setTitle("Level");
+		 
+		// Setting Dialog Message
+		helper.setMessage("The number located at the right of a Pokemon's name during battle.");
+
+		helper.setPositiveButton("OK",
+		        new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						
+					}
+		        });
+		//Display Help
+		helper.show();
+	}
 	public void populateSpinner(){
 		//Spinner adapter
         ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, pNameList);
