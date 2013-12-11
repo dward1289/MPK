@@ -12,6 +12,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -36,8 +37,10 @@ import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ShareActionProvider;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class AddNew extends Activity {
 
@@ -58,10 +61,34 @@ public class AddNew extends Activity {
 	JSONArray JSONobject;
 	Context context = this;
 	ProgressDialog dialog;
-	ArrayList<String> pNameList= new ArrayList<String>();
+	//List all Pokemon
+	ArrayList<String> pNameList = new ArrayList<String>();
+	//Pokemon types list
+	ArrayList<String>listNormal = new ArrayList<String>();
+	ArrayList<String>listFighting = new ArrayList<String>();
+	ArrayList<String>listRock = new ArrayList<String>();
+	ArrayList<String>listFire = new ArrayList<String>();
+	ArrayList<String>listPoison = new ArrayList<String>();
+	ArrayList<String>listGhost = new ArrayList<String>();
+	ArrayList<String>listWater = new ArrayList<String>();
+	ArrayList<String>listGround = new ArrayList<String>();
+	ArrayList<String>listDragon = new ArrayList<String>();
+	ArrayList<String>listElectric = new ArrayList<String>();
+	ArrayList<String>listFlying = new ArrayList<String>();
+	ArrayList<String>listDark = new ArrayList<String>();
+	ArrayList<String>listGrass = new ArrayList<String>();
+	ArrayList<String>listPsychic = new ArrayList<String>();
+	ArrayList<String>listSteel = new ArrayList<String>();
+	ArrayList<String>listIce = new ArrayList<String>();
+	ArrayList<String>listBug = new ArrayList<String>();
+	ArrayList<String>listFairy= new ArrayList<String>();
+	ArrayList<String>itemList= new ArrayList<String>();
+	ArrayAdapter<String> spinnerAdapter;
+	ShareActionProvider mShareActionProvider;
 	String pName;
 	ImageView help;
 	String typeSelected;
+	String nameSelected;
 	String pType;
 	
 	
@@ -70,7 +97,9 @@ public class AddNew extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.addnew_layout);
 		
-		getActionBar().setDisplayShowHomeEnabled(false);
+		//Hide application logo from action bar
+		ActionBar actionBar = getActionBar();
+		actionBar.setDisplayShowHomeEnabled(false);
 		
 		theTitle = (TextView)findViewById(R.id.theTitle);
 		theType = (TextView)findViewById(R.id.typeText);
@@ -108,12 +137,100 @@ public class AddNew extends Activity {
 		DownloadJSONTask task = new DownloadJSONTask();
 		task.execute();
 		
+		
+		
 		pokemonType.setOnItemSelectedListener(new OnItemSelectedListener(){
+			
+			@Override
+			public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+				 
+			if(pos == 0){
+				itemList = listNormal;
+				populateSpinner();	
+			}
+			if(pos == 1){
+				itemList = listFighting;	
+				populateSpinner();
+			}
+			if(pos == 2){
+				itemList = listRock;	
+				populateSpinner();
+			}
+			if(pos == 3){
+				itemList = listFire;	
+				populateSpinner();
+			}
+			if(pos == 4){
+				itemList = listPoison;	
+				populateSpinner();
+			}
+			if(pos == 5){
+				itemList = listGhost;	
+				populateSpinner();
+			}
+			if(pos == 6){
+				itemList = listWater;	
+				populateSpinner();
+			}
+			if(pos == 7){
+				itemList = listGround;	
+				populateSpinner();
+			}
+			if(pos == 8){
+				itemList = listDragon;	
+				populateSpinner();
+			}
+			if(pos == 9){
+				itemList = listElectric;	
+				populateSpinner();
+			}
+			if(pos == 10){
+				itemList = listFlying;	
+				populateSpinner();
+			}
+			if(pos == 11){
+				itemList = listDark;	
+				populateSpinner();
+			}
+			if(pos == 12){
+				itemList = listGrass;	
+				populateSpinner();
+			}
+			if(pos == 13){
+				itemList = listPsychic;	
+				populateSpinner();
+			}
+			if(pos == 14){
+				itemList = listSteel;	
+				populateSpinner();
+			}
+			if(pos == 15){
+				itemList = listIce;	
+				populateSpinner();
+			}
+			if(pos == 16){
+				itemList = listBug;	
+				populateSpinner();
+			}
+			if(pos == 17){
+				itemList = listFairy;	
+				populateSpinner();
+			}
+			
+			}
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+				// TODO Auto-generated method stub
+				
+			}	
+	});
+		
+		pokemonName.setOnItemSelectedListener(new OnItemSelectedListener(){
 
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-				
-			typeSelected = parent.getItemAtPosition(pos).toString();
+				nameSelected = parent.getItemAtPosition(pos).toString();
+			
 			}
 			@Override
 			public void onNothingSelected(AdapterView<?> arg0) {
@@ -152,6 +269,90 @@ public class AddNew extends Activity {
                          bufferString = new String(contentBytes,0,bytesRead);
                          responseBuffer.append(bufferString);
                  }
+                 
+                 try {
+                     JSONArray jsonArray = new JSONArray(responseBuffer.toString());
+                     
+                     int n = jsonArray.length();
+                     for(int i = 0;i<n; i++){
+                             JSONObject jsonObject = jsonArray.getJSONObject(i);
+                             pName = jsonObject.getString("name");
+                             pNameList.add(pName);
+                             
+                             pType = jsonObject.getString("type");
+                             
+                             //Sort data by category
+                             if(pType.contains("Normal")){
+                            	 pName = jsonObject.getString("name");
+                            	 listNormal.add(pName);
+                             }
+                             if(pType.contains("Fighting")){
+                            	 pName = jsonObject.getString("name");
+                            	 listFighting.add(pName);
+                             }
+                             if(pType.contains("Rock")){
+                            	 pName = jsonObject.getString("name");
+                            	 listRock.add(pName);
+                             }
+                             if(pType.contains("Fire")){
+                            	 pName = jsonObject.getString("name");
+                            	 listFire.add(pName);
+                             }
+                             if(pType.contains("Poison")){
+                            	 pName = jsonObject.getString("name");
+                            	 listPoison.add(pName);
+                             }
+                             if(pType.contains("Ghost")){
+                            	 pName = jsonObject.getString("name");
+                            	 listGhost.add(pName);
+                             }
+                             if(pType.contains("Water")){
+                            	 pName = jsonObject.getString("name");
+                            	 listWater.add(pName);
+                             }
+                             if(pType.contains("Ground")){
+                            	 pName = jsonObject.getString("name");
+                            	 listGround.add(pName);
+                             }
+                             if(pType.contains("Dragon")){
+                            	 pName = jsonObject.getString("name");
+                            	 listDragon.add(pName);
+                             }if(pType.contains("Electric")){
+                            	 pName = jsonObject.getString("name");
+                            	 listElectric.add(pName);
+                             }if(pType.contains("Flying")){
+                            	 pName = jsonObject.getString("name");
+                            	 listFlying.add(pName);
+                             }if(pType.contains("Dark")){
+                            	 pName = jsonObject.getString("name");
+                            	 listDark.add(pName);
+                             }if(pType.contains("Grass")){
+                            	 pName = jsonObject.getString("name");
+                            	 listGrass.add(pName);
+                             }
+                             if(pType.contains("Psychic")){
+                            	 pName = jsonObject.getString("name");
+                            	 listPsychic.add(pName);
+                             }
+                             if(pType.contains("Steel")){
+                            	 pName = jsonObject.getString("name");
+                            	 listSteel.add(pName);
+                             }
+                             if(pType.contains("Ice")){
+                            	 pName = jsonObject.getString("name");
+                            	 listIce.add(pName);
+                             }
+                             if(pType.contains("Bug")){
+                            	 pName = jsonObject.getString("name");
+                            	 listBug.add(pName);
+                             }
+                          
+                     }
+                 } catch (JSONException e1) {
+                     // TODO Auto-generated catch block
+                     e1.printStackTrace();
+             }
+                 
                  return responseBuffer.toString();
          }catch (Exception e){
                  Log.e("DATA REAT ERROR", "getURLStringResponse");
@@ -161,31 +362,8 @@ public class AddNew extends Activity {
 
 	    @Override
         protected void onPostExecute(String result){
-                try {
-                        JSONArray jsonArray = new JSONArray(result);
-                        
-                        int n = jsonArray.length();
-                        for(int i = 0;i<n; i++){
-                                JSONObject jsonObject = jsonArray.getJSONObject(i);
-             
-                                pType = jsonObject.getString("type");
-                                if(pType.contains(typeSelected)){
-                                	//POSSIBLY DELETE
-                                pName = jsonObject.getString("name");
-
-                                pNameList.add(pName);
-                                }
-                        }
-                        
-                        Log.i("WE HAVE DATA", pNameList.toString());
                         populateSpinner();
-                        dialog.dismiss();
-                        
-                        
-                } catch (JSONException e1) {
-                        // TODO Auto-generated catch block
-                        e1.printStackTrace();
-                }
+                        dialog.dismiss();     
         }        
 }
 	
@@ -247,18 +425,66 @@ public class AddNew extends Activity {
 	}
 	public void populateSpinner(){
 		//Spinner adapter
-        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, pNameList);
+        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, itemList);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerAdapter.notifyDataSetChanged();
         pokemonName.setAdapter(spinnerAdapter);
+	}
+	
+	//Check data before saving
+	public void checkData(){
+		if(theDate.getText().toString().trim().equals("")){	 
+			AlertDialog.Builder userErr = new AlertDialog.Builder(AddNew.this);
+			userErr.setTitle("Date");
+			userErr.setMessage("Please select date.");
+			userErr.setPositiveButton("OK",
+			        new DialogInterface.OnClickListener() {
+			            public void onClick(DialogInterface dialog, int which) {			            
+			            }
+			        });
+			userErr.show();	
+		}else if(lvlNum.getText().toString().trim().equals("") || lvlNum.getText().toString().length() < 0){	 
+			AlertDialog.Builder userErr = new AlertDialog.Builder(AddNew.this);
+			userErr.setTitle("Level");
+			userErr.setMessage("Please enter the level of the Pokemon.");
+			userErr.setPositiveButton("OK",
+			        new DialogInterface.OnClickListener() {
+			            public void onClick(DialogInterface dialog, int which) {			            
+			            }
+			        });
+			userErr.show();	
+		}else{
+			Toast.makeText(getApplicationContext(), "Pokemon Saved", Toast.LENGTH_SHORT).show();
+		}
+	}
+	
+	//Share data intent
+	public void shareData(){
+		typeSelected = pokemonType.getSelectedItem().toString();
+		nameSelected = pokemonName.getSelectedItem().toString();
+		
+		Intent mShareIntent = new Intent();
+		mShareIntent.setAction(Intent.ACTION_SEND);
+		mShareIntent.setType("text/plain");
+		mShareIntent.putExtra(Intent.EXTRA_TEXT, "I just captured "+typeSelected+"!" + " It's a "+nameSelected+" type of Pokemon.");
+		startActivity(mShareIntent);
+	}
+	
+	//Saves data to database.(This will be functioning completely on Milestone 3.
+	public void saveData(View v){
+		//display in short period of time
+		checkData();
 	}
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.add_menu, menu);
+
 		return true;
 	}
 
+	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 	    // Handle presses on the action bar items
@@ -266,9 +492,14 @@ public class AddNew extends Activity {
 	        case android.R.id.home:
 		    	Intent intent = new Intent(this, CapturedList.class);
 	            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-	            startActivity(intent);            
+	            startActivity(intent);           
+	            break;
+	        case R.id.saved:
+	        	Intent intent2 = new Intent(this, CapturedList.class);
+	            startActivity(intent2); 
 	            break;
 	        case R.id.shareIt2:
+	        	shareData();
 	            break;	        
 	        default:
 	            break;

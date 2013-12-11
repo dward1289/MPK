@@ -323,6 +323,9 @@ public class ProfileCard extends Activity {
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             break;
+	    	case R.id.shareIt:
+	    		shareData();
+	    		break;
 	        case R.id.saveIt:
 	            checkData();
 	            break;
@@ -332,6 +335,20 @@ public class ProfileCard extends Activity {
 	    return true;
 	}
 		
+	//Share info intent
+	public void shareData(){
+		usernameTxt = unInput.getText().toString();
+		c1 = theCode1.getText().toString();
+		c2 = theCode1.getText().toString();
+		c3 = theCode1.getText().toString();
+		
+		Intent mShareIntent = new Intent();
+		mShareIntent.setAction(Intent.ACTION_SEND);
+		mShareIntent.setType("text/plain");
+		mShareIntent.putExtra(Intent.EXTRA_TEXT,"Let's battle Pokemon!\nUsername: "+usernameTxt+"\nFriend Code: "+c1+"-"+c2+"-"+c3);
+		startActivity(mShareIntent);
+	}
+	
 	public void checkData(){
 		if(attachImage.getDrawable() == null){
 			AlertDialog.Builder userErr = new AlertDialog.Builder(ProfileCard.this);

@@ -138,6 +138,7 @@
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
         android:textSize="20sp"
+        android:onClick="saveData"
         android:layout_gravity="right"
         android:text="@string/ok" />
 
