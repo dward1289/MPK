@@ -466,7 +466,7 @@ public class AddNew extends Activity {
 		Intent mShareIntent = new Intent();
 		mShareIntent.setAction(Intent.ACTION_SEND);
 		mShareIntent.setType("text/plain");
-		mShareIntent.putExtra(Intent.EXTRA_TEXT, "I just captured "+typeSelected+"!" + " It's a "+nameSelected+" type of Pokemon.");
+		mShareIntent.putExtra(Intent.EXTRA_TEXT, "I just captured "+nameSelected+"!" + " It's a "+typeSelected+" type of Pokemon.");
 		startActivity(mShareIntent);
 	}
 	
