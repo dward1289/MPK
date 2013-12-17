@@ -19,10 +19,10 @@ public class DBHandler extends SQLiteOpenHelper {
     // Database Name
     private static final String DATABASE_NAME = "pokemonManager";
  
-    // Contacts table name
+    //Pokemon table name
     private static final String TABLE_POKEMON = "pokemon";
  
-    // Contacts Table Columns names
+    //Pokemon Table Columns names
     private static final String KEY_ID = "_id";
     private static final String KEY_NAME = "name";
     private static final String KEY_TYPE = "type";
