@@ -40,6 +40,7 @@ public class CapturedList extends Activity {
 	ListView theListCap;
 	SimpleAdapter adapter;
 	List<thePokemon> pokemon;
+	int IDI;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +56,7 @@ public class CapturedList extends Activity {
 		
 		
 		
-		DBHandler db = new DBHandler(this);
+		final DBHandler db = new DBHandler(this);
 		pokemon = db.getAllPokemon();
 		
 		ArrayList<theItems> pokemonResults = GetPokemon();
@@ -67,16 +68,19 @@ public class CapturedList extends Activity {
                 Object o = theListCap.getItemAtPosition(position);
                 theItems fullObject = (theItems)o;
                 Toast.makeText(CapturedList.this, "You have chosen: " + " " + fullObject.getName(), Toast.LENGTH_LONG).show();
+
+                db.deletePokemon(position);
+
             }
         });
     }
- 
+
     private ArrayList<theItems> GetPokemon(){
      ArrayList<theItems> results = new ArrayList<theItems>();
      
      for (thePokemon cn : pokemon) {
      theItems sr = new theItems();
-
+     	 IDI = cn.getID();
          sr.setName(cn.getName());
          sr.setDate(cn.getDate());
          sr.setType(cn.getType());

@@ -8,6 +8,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class DBHandler extends SQLiteOpenHelper {
 
@@ -22,7 +23,7 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String TABLE_POKEMON = "pokemon";
  
     // Contacts Table Columns names
-    private static final String KEY_ID = "id";
+    private static final String KEY_ID = "_id";
     private static final String KEY_NAME = "name";
     private static final String KEY_TYPE = "type";
     private static final String KEY_DATE = "date";
@@ -117,7 +118,7 @@ public class DBHandler extends SQLiteOpenHelper {
     }
  
     // Updating single Pokemon
-    public int updateContact(thePokemon pokemon) {
+    public int updatePokemon(thePokemon pokemon) {
         SQLiteDatabase db = this.getWritableDatabase();
  
         ContentValues values = new ContentValues();
@@ -133,10 +134,11 @@ public class DBHandler extends SQLiteOpenHelper {
     }
  
     // Deleting single Pokemon
-    public void deletePokemon(thePokemon pokemon) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_POKEMON, KEY_ID + " = ?",
-                new String[] { String.valueOf(pokemon.getID()) });
+    public void deletePokemon(int po) {
+    	SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_POKEMON, KEY_NAME + "=" + po, null);
+        int rows = db.delete(TABLE_POKEMON, KEY_NAME + "=" + po, null);
+        Log.i("ROWS", rows+"");
         db.close();
     }
  
