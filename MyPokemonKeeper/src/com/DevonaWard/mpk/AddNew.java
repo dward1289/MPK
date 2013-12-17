@@ -458,8 +458,27 @@ public class AddNew extends Activity {
 			            }
 			        });
 			userErr.show();	
-		}else if(lvlNum.getText().toString().length() != 0 && theDate.getText().toString().length() != 0){
+		}
+		
+		if(lvlNum.getText().toString().length() != 0 && theDate.getText().toString().length() != 0){
+			typeSelected = pokemonType.getSelectedItem().toString();
+			nameSelected = pokemonName.getSelectedItem().toString();
+			selDate = theDate.getText().toString();
+			selLVL = lvlNum.getText().toString();
+			
+			DBHandler db = new DBHandler(this);
+			db.addPokemon(new thePokemon(nameSelected, typeSelected,selDate, selLVL, imageTXT));
+			List<thePokemon> pokemon = db.getAllPokemon();
+			for (thePokemon cn : pokemon) {
+	            String log = "Id: "+cn.getID()+" ,Name: " + cn.getName() + " ,Type: " + cn.getType()+ "Date: " + cn.getDate()+ " ,LVL: " + cn.getLevel()+ " ,Image: " + cn.getImage();
+	            // Writing Pokemon to log
+	            Log.i("SQLite Working",log);
+	    }
 			Toast.makeText(getApplicationContext(), "Pokemon Saved", Toast.LENGTH_SHORT).show();
+			
+			Intent intent = new Intent(this, CapturedList.class);
+			finish();
+            startActivity(intent);
 		}
 	}
 	
@@ -479,19 +498,7 @@ public class AddNew extends Activity {
 	public void saveData(View v){
 		checkData();
 		
-		typeSelected = pokemonType.getSelectedItem().toString();
-		nameSelected = pokemonName.getSelectedItem().toString();
-		selDate = theDate.getText().toString();
-		selLVL = lvlNum.getText().toString();
-		
-		DBHandler db = new DBHandler(this);
-		db.addPokemon(new thePokemon(nameSelected, typeSelected,selDate, selLVL, imageTXT));
-		List<thePokemon> pokemon = db.getAllPokemon();
-		for (thePokemon cn : pokemon) {
-            String log = "Id: "+cn.getID()+" ,Name: " + cn.getName() + " ,Type: " + cn.getType()+ "Date: " + cn.getDate()+ " ,LVL: " + cn.getLevel()+ " ,Image: " + cn.getImage();
-            // Writing Pokemon to log
-            Log.i("SQLite Working",log);
-    }
+
 		
 	}
 	
