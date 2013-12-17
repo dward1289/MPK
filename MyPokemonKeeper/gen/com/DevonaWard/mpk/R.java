@@ -40,11 +40,12 @@ public final class R {
         public static final int listit=0x7f02000d;
         public static final int maletrainer=0x7f02000e;
         public static final int mglogo=0x7f02000f;
-        public static final int person=0x7f020010;
-        public static final int pichukachu=0x7f020011;
-        public static final int pokeman=0x7f020012;
-        public static final int pokemont=0x7f020013;
-        public static final int sharefb=0x7f020014;
+        public static final int mpkpic=0x7f020010;
+        public static final int person=0x7f020011;
+        public static final int pichukachu=0x7f020012;
+        public static final int pokeman=0x7f020013;
+        public static final int pokemont=0x7f020014;
+        public static final int sharefb=0x7f020015;
     }
     public static final class id {
         public static final int CapturedList=0x7f09001a;
