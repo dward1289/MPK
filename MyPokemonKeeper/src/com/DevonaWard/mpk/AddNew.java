@@ -458,7 +458,7 @@ public class AddNew extends Activity {
 			            }
 			        });
 			userErr.show();	
-		}else{
+		}else if(lvlNum.getText().toString().length() != 0 && theDate.getText().toString().length() != 0){
 			Toast.makeText(getApplicationContext(), "Pokemon Saved", Toast.LENGTH_SHORT).show();
 		}
 	}

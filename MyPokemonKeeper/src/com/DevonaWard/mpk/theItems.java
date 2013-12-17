@@ -8,6 +8,7 @@ public class theItems {
     private String Date = "";
     private String Level = "";
     private String image;
+    private int id;
 
     public void setName(String name) {
      this.Name = name;
@@ -17,6 +18,14 @@ public class theItems {
      return Name;
     }
 
+    public void setId(int id) {
+        this.id = id;
+       }
+
+       public int getId() {
+        return id;
+       }
+       
     public void setType(String type) {
      this.Type = type;
     }

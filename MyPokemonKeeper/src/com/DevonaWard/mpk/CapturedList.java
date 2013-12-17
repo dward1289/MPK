@@ -41,6 +41,7 @@ public class CapturedList extends Activity {
 	SimpleAdapter adapter;
 	List<thePokemon> pokemon;
 	int IDI;
+	thePokemon cm;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -68,8 +69,9 @@ public class CapturedList extends Activity {
                 Object o = theListCap.getItemAtPosition(position);
                 theItems fullObject = (theItems)o;
                 Toast.makeText(CapturedList.this, "You have chosen: " + " " + fullObject.getName(), Toast.LENGTH_LONG).show();
-
-                db.deletePokemon(position);
+                
+                db.deletePokemon(cm.getID());
+                db.close();
 
             }
         });
@@ -80,7 +82,7 @@ public class CapturedList extends Activity {
      
      for (thePokemon cn : pokemon) {
      theItems sr = new theItems();
-     	 IDI = cn.getID();
+     	 sr.setId(cn.getID());
          sr.setName(cn.getName());
          sr.setDate(cn.getDate());
          sr.setType(cn.getType());
