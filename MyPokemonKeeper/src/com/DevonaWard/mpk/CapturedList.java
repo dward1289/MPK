@@ -14,6 +14,8 @@ import java.util.Map;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -41,7 +43,7 @@ public class CapturedList extends Activity {
 	SimpleAdapter adapter;
 	List<thePokemon> pokemon;
 	int IDI;
-	thePokemon cm;
+	ArrayList<theItems> results;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -65,20 +67,51 @@ public class CapturedList extends Activity {
  
         theListCap.setOnItemClickListener(new OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> a, View v, int position, long id) {
+            public void onItemClick(AdapterView<?> a, View v, final int position, long id) {
                 Object o = theListCap.getItemAtPosition(position);
                 theItems fullObject = (theItems)o;
                 Toast.makeText(CapturedList.this, "You have chosen: " + " " + fullObject.getName(), Toast.LENGTH_LONG).show();
                 
-                db.deletePokemon(cm.getID());
-                db.close();
+              //Create alert Dialog		 
+    			AlertDialog.Builder helper = new AlertDialog.Builder(CapturedList.this);
+    			 
+    			//Alert Title
+    			helper.setTitle("Delete Pokemon");
+    			 
+    			// Setting Dialog Message
+    			helper.setMessage("Delete the selected Pokemon from your Captured List?");
+
+    			helper.setPositiveButton("YES",
+    			        new DialogInterface.OnClickListener() {
+
+    						@Override
+    						public void onClick(DialogInterface dialog, int which) {
+    							db.deletePokemon(results.get(position).getId());
+    			                db.close();
+    			                Intent intent = getIntent();
+    			                finish();
+    			                startActivity(intent);
+    						}
+    			        });
+    			helper.setNegativeButton("NO",
+    			        new DialogInterface.OnClickListener() {
+
+    						@Override
+    						public void onClick(DialogInterface dialog, int which) {
+    							
+    						}
+    			        });
+    			//Display Help
+    			helper.show();
+                
+                
 
             }
         });
     }
 
     private ArrayList<theItems> GetPokemon(){
-     ArrayList<theItems> results = new ArrayList<theItems>();
+    results = new ArrayList<theItems>();
      
      for (thePokemon cn : pokemon) {
      theItems sr = new theItems();
@@ -88,10 +121,7 @@ public class CapturedList extends Activity {
          sr.setType(cn.getType());
          sr.setLevel("Level "+cn.getLevel());
          sr.setImage(cn.getImage());
-         
-         String log = " ,Name: " + cn.getName() + " ,Type: " + cn.getType()+ "Date: " + cn.getDate()+ " ,LVL: " + cn.getLevel()+ " ,Image: " + cn.getImage();
-         // Writing Pokemon to log
-         Log.i("SQLite Working",log);
+  
          results.add(sr);
     }
      return results;
@@ -136,5 +166,8 @@ public class CapturedList extends Activity {
 	    Intent intent = new Intent(this, AddNew.class);
 	    startActivity(intent);
 	}
-		
+	
+	public void confirmDelete(){			
+			
+		}		
 }
