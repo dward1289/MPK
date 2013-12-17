@@ -21,10 +21,9 @@ Installation Guide
 Final Feature List
 ==================
 - Custom ListView
-  The custom list view allows the user to view
-  Pokemon that have been added to their Captured List.
-  The custom list view displays information about the Pokemon, and 
-  allows the user to delete the Pokemon by tapping a Pokemon from the list.
+  The custom list view allows the user to view Pokemon that have been added to 
+  their Captured List. The custom list view displays information about the Pokemon, 
+  and allows the user to delete the Pokemon by tapping a Pokemon from the list.
   
 - ActionBar
   The action bar is the main navigation for this application. The action bar
@@ -36,8 +35,8 @@ Final Feature List
   default.
   
 - Share
-  The user will be able to share the Pokemon they've caught with their friends
-  by using the share button located in the Action Bar. The user can also share
+  The user will several options available to share the Pokemon they've caught with their 
+  friends by using the share button located in the Action Bar. The user can also share
   their Profile Card with their friends, and ask them to battle.
   
 - Avatars
@@ -48,7 +47,7 @@ Final Feature List
   There are a total of 600+ Pokemon. Instead of having the user look through all
   of the Pokemon, the spinners keep the Pokemon sorted by type. The first spinner 
   allows the user to select the Pokemon type. The second spinner finds all of the 
-  Pokemon that are the selected type and populates with the name of Pokemon.
+  Pokemon that are of that selected type and populates with the name of the Pokemon.
   
 User Guidelines
 ================
@@ -57,11 +56,11 @@ User Guidelines
   
 Special Instructions (Walk-Through)
 ===================================
-- Tap the smilig face icon located in the action bar.
+- Tap the smiling face icon located in the action bar.
 - Tap the image displaying a paper clip with a plus.
 - Upload a photo, capture a photo, or select an avatar.
 - If avatar is selected, tap the check button to confirm
-  selection after selecting an avatar.
+  selection.
 - Tap the check button to save Profile Card.
 - Tap the share button beside the check button, and share
   your Profile Card with a friend.
