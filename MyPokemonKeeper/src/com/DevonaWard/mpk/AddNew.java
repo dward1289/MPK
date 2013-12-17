@@ -486,8 +486,8 @@ public class AddNew extends Activity {
 		
 		DBHandler db = new DBHandler(this);
 		db.addPokemon(new thePokemon(nameSelected, typeSelected,selDate, selLVL, imageTXT));
-		List<thePokemon> contacts = db.getAllPokemon();
-		for (thePokemon cn : contacts) {
+		List<thePokemon> pokemon = db.getAllPokemon();
+		for (thePokemon cn : pokemon) {
             String log = "Id: "+cn.getID()+" ,Name: " + cn.getName() + " ,Type: " + cn.getType()+ "Date: " + cn.getDate()+ " ,LVL: " + cn.getLevel()+ " ,Image: " + cn.getImage();
             // Writing Pokemon to log
             Log.i("SQLite Working",log);

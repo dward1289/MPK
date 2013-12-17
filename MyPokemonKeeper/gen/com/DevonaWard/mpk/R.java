@@ -47,13 +47,18 @@ public final class R {
         public static final int sharefb=0x7f020014;
     }
     public static final class id {
-        public static final int aboutMG=0x7f09002b;
-        public static final int addNew=0x7f090029;
+        public static final int CapturedList=0x7f09001a;
+        public static final int DateCaught=0x7f09001e;
+        public static final int PokemonLevel=0x7f090020;
+        public static final int PokemonName=0x7f09001c;
+        public static final int PokemonType=0x7f09001d;
+        public static final int aboutMG=0x7f090032;
+        public static final int addNew=0x7f090030;
         public static final int appName=0x7f090000;
         public static final int avatarPreview=0x7f090010;
-        public static final int code1=0x7f090021;
-        public static final int code2=0x7f090022;
-        public static final int code3=0x7f090023;
+        public static final int code1=0x7f090028;
+        public static final int code2=0x7f090029;
+        public static final int code3=0x7f09002a;
         public static final int dateData=0x7f09000c;
         public static final int dateText=0x7f09000d;
         public static final int developerName=0x7f090002;
@@ -67,31 +72,33 @@ public final class R {
         public static final int image7=0x7f090017;
         public static final int image8=0x7f090018;
         public static final int image9=0x7f090019;
-        public static final int imageAttach=0x7f09001b;
+        public static final int imageAttach=0x7f090022;
         public static final int imageView1=0x7f090003;
-        public static final int infoHelp1=0x7f09001c;
-        public static final int infoHelp2=0x7f09001f;
+        public static final int infoHelp1=0x7f090023;
+        public static final int infoHelp2=0x7f090026;
         public static final int lvlNumber=0x7f090009;
         public static final int lvlText=0x7f09000b;
+        public static final int my_image=0x7f09001f;
         public static final int pokemonSpinner=0x7f090008;
         public static final int pokemonText=0x7f090007;
-        public static final int profileCard=0x7f09002a;
-        public static final int saveIt=0x7f09002d;
-        public static final int saved=0x7f090026;
-        public static final int selectImage=0x7f090028;
-        public static final int shareIt=0x7f09002c;
-        public static final int shareIt2=0x7f090027;
+        public static final int profileCard=0x7f090031;
+        public static final int saveIt=0x7f090034;
+        public static final int saved=0x7f09002d;
+        public static final int selectImage=0x7f09002f;
+        public static final int shareIt=0x7f090033;
+        public static final int shareIt2=0x7f09002e;
         public static final int submitData=0x7f09000e;
-        public static final int theFavP=0x7f090024;
-        public static final int theFavTxt=0x7f090025;
-        public static final int theFriendCode=0x7f090020;
+        public static final int theFavP=0x7f09002b;
+        public static final int theFavTxt=0x7f09002c;
+        public static final int theFriendCode=0x7f090027;
         public static final int theTitle=0x7f090004;
-        public static final int theUsername=0x7f09001d;
+        public static final int theUsername=0x7f090024;
         public static final int theavT=0x7f09000f;
-        public static final int thepct=0x7f09001a;
+        public static final int thepct=0x7f090021;
+        public static final int txtLayout=0x7f09001b;
         public static final int typeSpinner=0x7f090006;
         public static final int typeText=0x7f090005;
-        public static final int userTxt=0x7f09001e;
+        public static final int userTxt=0x7f090025;
         public static final int versionName=0x7f090001;
     }
     public static final class layout {
@@ -99,7 +106,8 @@ public final class R {
         public static final int addnew_layout=0x7f030001;
         public static final int avatar_layout=0x7f030002;
         public static final int captured_list=0x7f030003;
-        public static final int profile_card=0x7f030004;
+        public static final int list_row=0x7f030004;
+        public static final int profile_card=0x7f030005;
     }
     public static final class menu {
         public static final int about_menu=0x7f080000;
