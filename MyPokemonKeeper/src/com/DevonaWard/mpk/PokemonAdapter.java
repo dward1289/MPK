@@ -19,6 +19,7 @@ public class PokemonAdapter extends BaseAdapter {
     Bitmap bmp;
     URL url;
     
+    
     private LayoutInflater mInflater;
  
     public PokemonAdapter(Context context, ArrayList<theItems> results) {

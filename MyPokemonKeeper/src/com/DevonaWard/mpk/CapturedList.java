@@ -118,7 +118,7 @@ public class CapturedList extends Activity {
      	 sr.setId(cn.getID());
          sr.setName(cn.getName());
          sr.setDate(cn.getDate());
-         sr.setType(cn.getType());
+         sr.setType("Type: "+cn.getType());
          sr.setLevel("Level "+cn.getLevel());
          sr.setImage(cn.getImage());
   
