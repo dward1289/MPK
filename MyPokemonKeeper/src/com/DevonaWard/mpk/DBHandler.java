@@ -136,9 +136,7 @@ public class DBHandler extends SQLiteOpenHelper {
     // Deleting single Pokemon
     public void deletePokemon(int po) {
     	SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_POKEMON, KEY_NAME + "=" + po, null);
-        int rows = db.delete(TABLE_POKEMON, KEY_NAME + "=" + po, null);
-        Log.i("ROWS", rows+"");
+        db.delete(TABLE_POKEMON, KEY_ID+ "=" + po, null);
         db.close();
     }
  
