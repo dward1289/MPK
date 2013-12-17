@@ -38,7 +38,7 @@ public class DBHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String CREATE_POKEMON_TABLE = "CREATE TABLE " + TABLE_POKEMON + "("
-                + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT,"
+                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_NAME + " TEXT,"
                 + KEY_TYPE + " TEXT," + KEY_DATE + " TEXT," + KEY_LEVEL + " TEXT," + KEY_IMG + " TEXT" +")";
         db.execSQL(CREATE_POKEMON_TABLE);
     }
