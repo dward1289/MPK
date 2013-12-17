@@ -39,7 +39,6 @@ import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ShareActionProvider;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -496,10 +495,7 @@ public class AddNew extends Activity {
 	
 	//Saves data to database.
 	public void saveData(View v){
-		checkData();
-		
-
-		
+		checkData();	
 	}
 	
 	@Override

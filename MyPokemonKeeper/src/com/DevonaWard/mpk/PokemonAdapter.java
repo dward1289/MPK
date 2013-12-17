@@ -1,6 +1,6 @@
 package com.DevonaWard.mpk;
 
-
+//Custom adapter for list view
 import java.net.URL;
 import java.util.ArrayList;
 

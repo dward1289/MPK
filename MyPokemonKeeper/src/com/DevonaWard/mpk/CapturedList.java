@@ -1,16 +1,10 @@
 package com.DevonaWard.mpk;
 
-import java.io.BufferedInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -18,16 +12,12 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.graphics.Typeface;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -58,7 +48,7 @@ public class CapturedList extends Activity {
 		theTitle.setTypeface(font);
 		
 		
-		
+		//Load data from SQLite database
 		final DBHandler db = new DBHandler(this);
 		pokemon = db.getAllPokemon();
 		
@@ -110,6 +100,7 @@ public class CapturedList extends Activity {
         });
     }
 
+	//Populate list view
     private ArrayList<theItems> GetPokemon(){
     results = new ArrayList<theItems>();
      
