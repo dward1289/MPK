@@ -5,6 +5,8 @@ import java.io.InputStream;
 import java.text.DateFormatSymbols;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
+import java.util.Locale;
 
 
 import org.json.JSONArray;
@@ -84,12 +86,14 @@ public class AddNew extends Activity {
 	ArrayList<String>listFairy= new ArrayList<String>();
 	ArrayList<String>itemList= new ArrayList<String>();
 	ArrayAdapter<String> spinnerAdapter;
-	ShareActionProvider mShareActionProvider;
 	String pName;
 	ImageView help;
 	String typeSelected;
 	String nameSelected;
 	String pType;
+	String selDate;
+	String selLVL;
+	String imageTXT;
 	
 	
 	@Override
@@ -143,9 +147,9 @@ public class AddNew extends Activity {
 			
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-				 
+				 			
 			if(pos == 0){
-				itemList = listNormal;
+				itemList = listNormal;				
 				populateSpinner();	
 			}
 			if(pos == 1){
@@ -230,7 +234,9 @@ public class AddNew extends Activity {
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
 				nameSelected = parent.getItemAtPosition(pos).toString();
-			
+				String lower = nameSelected.toLowerCase(Locale.ENGLISH);
+				imageTXT = "http://img.pokemondb.net/artwork/"+lower+".jpg";
+			    Log.i("THE IMAGE", imageTXT);
 			}
 			@Override
 			public void onNothingSelected(AdapterView<?> arg0) {
@@ -345,8 +351,7 @@ public class AddNew extends Activity {
                              if(pType.contains("Bug")){
                             	 pName = jsonObject.getString("name");
                             	 listBug.add(pName);
-                             }
-                          
+                             }                                                 
                      }
                  } catch (JSONException e1) {
                      // TODO Auto-generated catch block
@@ -470,10 +475,24 @@ public class AddNew extends Activity {
 		startActivity(mShareIntent);
 	}
 	
-	//Saves data to database.(This will be functioning completely on Milestone 3.
+	//Saves data to database.
 	public void saveData(View v){
-		//display in short period of time
 		checkData();
+		
+		typeSelected = pokemonType.getSelectedItem().toString();
+		nameSelected = pokemonName.getSelectedItem().toString();
+		selDate = theDate.getText().toString();
+		selLVL = lvlNum.getText().toString();
+		
+		DBHandler db = new DBHandler(this);
+		db.addPokemon(new thePokemon(nameSelected, typeSelected,selDate, selLVL, imageTXT));
+		List<thePokemon> contacts = db.getAllPokemon();
+		for (thePokemon cn : contacts) {
+            String log = "Id: "+cn.getID()+" ,Name: " + cn.getName() + " ,Type: " + cn.getType()+ "Date: " + cn.getDate()+ " ,LVL: " + cn.getLevel()+ " ,Image: " + cn.getImage();
+            // Writing Pokemon to log
+            Log.i("SQLite Working",log);
+    }
+		
 	}
 	
 	@Override
